@@ -3,7 +3,7 @@ package app
 import (
 	"github.com/robfig/revel"
 
-	"github.com/itang/haoshuju/haoshuju.net/app/filters"
+	//"github.com/itang/haoshuju/haoshuju.net/app/filters"
 )
 
 func init() {
@@ -11,7 +11,7 @@ func init() {
 	revel.Filters = []revel.Filter{
 		revel.PanicFilter, // Recover from panics and display an error page instead.
 
-		filters.XRuntimeFilter,
+		//filters.XRuntimeFilter,
 
 		revel.RouterFilter, // Use the routing table to select the right Action
 

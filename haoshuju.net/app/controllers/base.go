@@ -23,7 +23,7 @@ func (c *XRuntime) DoBegin() revel.Result {
 func (c *XRuntime) DoEnd() revel.Result {
 	c.End = time.Now()
 	c.Cost = c.End.Sub(c.Start)
-	c.Response.Out.Header().Add("Cost-Time", fmt.Sprintf("%v", c.Cost))
+	c.Response.Out.Header().Add("X-Runtime", fmt.Sprintf("%v", c.Cost))
 	return nil
 }
 

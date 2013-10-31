@@ -19,3 +19,7 @@ func (c App) Test() revel.Result {
 	time.Sleep(time.Second * 2)
 	return c.RenderText("test")
 }
+
+func (c App) Test1() revel.Result {
+	return c.RenderText("test1")
+}
