@@ -3,15 +3,18 @@ package controllers
 import (
 	"time"
 
+	gtime "github.com/itang/gotang/time"
+	"github.com/itang/reveltang"
 	"github.com/robfig/revel"
 )
 
 type App struct {
 	*revel.Controller
-	XRuntime
+	reveltang.XRuntimeable
 }
 
 func (c App) Index() revel.Result {
+	c.RenderArgs["now"] = gtime.FormatDefault(time.Now())
 	return c.Render()
 }
 
