@@ -4,13 +4,13 @@ import (
 	"time"
 
 	gtime "github.com/itang/gotang/time"
-	"github.com/itang/reveltang"
+	. "github.com/itang/reveltang"
 	"github.com/robfig/revel"
 )
 
 type App struct {
 	*revel.Controller
-	reveltang.XRuntimeable
+	XRuntimeableController
 }
 
 func (c App) Index() revel.Result {
