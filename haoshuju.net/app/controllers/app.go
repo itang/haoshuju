@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	. "github.com/itang/reveltang"
+	. "github.com/itang/reveltang/controllers"
 	"github.com/robfig/revel"
 )
 
