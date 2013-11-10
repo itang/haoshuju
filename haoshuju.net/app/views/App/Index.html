@@ -9,6 +9,9 @@
         <h2>It works!</h2>
 
         <p>now: {{.now}}</p>
+        <div ng-controller="VersionController">
+        version: [[version]]
+        </div>
       </div>
     </div>
   </div>
@@ -21,5 +24,19 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  var haoshujuApp = angular.module("haoshujuApp", []);
+  haoshujuApp.config(["$interpolateProvider", function($interpolateProvider){
+    $interpolateProvider.startSymbol("[[");
+    $interpolateProvider.endSymbol("]]");
+  }]);
+  haoshujuApp.controller('VersionController', ['$scope', '$http',
+  function VersionController($scope, $http) {
+    $http.get('/app/version').success(function(data) {
+      $scope.version = data.Data;
+    });
+  }]);
+</script>
 
 {{template "footer.html" .}}

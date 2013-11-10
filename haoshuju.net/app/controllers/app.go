@@ -9,3 +9,10 @@ type BaseController struct {
 	*revel.Controller
 	XRuntimeableController
 }
+
+type Message struct {
+	Code    int
+	Level   string
+	Message string
+	Data    interface{}
+}
