@@ -4,12 +4,13 @@
 <header class="hero-unit" style="background-color:#A9F16C">
   <div class="container">
     <div class="row">
-      <div class="hero-text">
+      <div class="hero-text" ng-controller="VersionController">
         <h1>Hao Shu Ju . Net</h1>
         <h2>It works!</h2>
 
         <p>now: {{.now}}</p>
-        <div ng-controller="VersionController">
+        <p>server time: [[serverTime]]</p>
+        <div>
         version: [[version]]
         </div>
       </div>
@@ -27,14 +28,23 @@
 
 <script type="text/javascript">
   var haoshujuApp = angular.module("haoshujuApp", []);
+
   haoshujuApp.config(["$interpolateProvider", function($interpolateProvider){
     $interpolateProvider.startSymbol("[[");
     $interpolateProvider.endSymbol("]]");
   }]);
-  haoshujuApp.controller('VersionController', ['$scope', '$http',
-  function VersionController($scope, $http) {
+
+  haoshujuApp.controller('VersionController', ['$scope', '$http', '$timeout',
+  function VersionController($scope, $http, $timeout) {
     $http.get('/app/version').success(function(data) {
       $scope.version = data.Data;
+    });
+    $scope.$watch("serverTime", function(newValue, oldValue){
+      $timeout(function() {
+        $http.get('/app/servertime').success(function(data) {
+          $scope.serverTime = data.Data;
+        });
+      }, 1000);
     });
   }]);
 </script>
