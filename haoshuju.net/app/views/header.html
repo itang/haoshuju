@@ -9,8 +9,12 @@
     {{range .moreStyles}}
       <link rel="stylesheet" type="text/css" href="/public/{{.}}">
     {{end}}
-    <script src="/public/js/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/public/bower_components/jquery/jquery.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="/public/bower_components/angular/angular.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/public/js/app/app.js"></script>
+    <script src="/public/js/app/controllers.js"></script>
+    <script src="/public/js/app/filters.js"></script>
+    <script src="/public/js/app/services.js"></script>
     {{range .moreScripts}}
       <script src="/public/{{.}}" type="text/javascript" charset="utf-8"></script>
     {{end}}
