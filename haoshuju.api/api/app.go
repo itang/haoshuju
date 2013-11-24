@@ -23,6 +23,6 @@ var (
 	}
 )
 
-func GetLocalApiApp() ApiApp {
+func GetApiApp() ApiApp {
 	return apiApp
 }
