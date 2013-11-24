@@ -19,7 +19,6 @@ func main() {
 }
 
 func run(handler http.Handler) {
-	//m.Run()
 	httpPort := api.GetLocalApiApp().HttpPort
 	log.Printf("[martini] listening on port %d", httpPort)
 	http.ListenAndServe(fmt.Sprintf(":%d", httpPort), handler)
