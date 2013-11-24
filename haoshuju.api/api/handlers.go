@@ -16,14 +16,12 @@ func AppInfoHandler(appInfo AppInfo, resp http.ResponseWriter) {
 }
 
 func AppInfoPropHandler(appInfo AppInfo, params martini.Params) (ret string) {
-	prop := params["prop"]
-	switch prop {
+	switch params["prop"] {
 	case "version":
 		ret = appInfo.App.Version
 	default:
 		ret = ""
 	}
-
 	return
 }
 
@@ -31,6 +29,5 @@ func AppInfoPropHandler(appInfo AppInfo, params martini.Params) (ret string) {
 // utils
 func renderJson(resp http.ResponseWriter, obj interface{}) {
 	resp.Header().Add("Content-Type", "application/json; charset=utf-8")
-	encoder := json.NewEncoder(resp)
-	encoder.Encode(obj)
+	json.NewEncoder(resp).Encode(obj)
 }

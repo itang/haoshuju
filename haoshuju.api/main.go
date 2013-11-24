@@ -34,10 +34,7 @@ func main() {
 	m := martini.Classic()
 
 	m.Map(appInfo)
-
-	m.Get("/", api.IndexHandler)
-	m.Get("/appinfo", api.AppInfoHandler)
-	m.Get("/appinfo/:prop", api.AppInfoPropHandler)
+	api.Routes(m)
 
 	run(m)
 }
