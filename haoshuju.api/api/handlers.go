@@ -11,14 +11,14 @@ func IndexHandler(resp http.ResponseWriter, req *http.Request) {
 	http.Redirect(resp, req, "/info.html", http.StatusFound)
 }
 
-func AppInfoHandler(appInfo AppInfo, resp http.ResponseWriter) {
-	renderJson(resp, appInfo)
+func AppInfoHandler(app ApiApp, resp http.ResponseWriter) {
+	renderJson(resp, app)
 }
 
-func AppInfoPropHandler(appInfo AppInfo, params martini.Params) (ret string) {
+func AppInfoPropHandler(app ApiApp, params martini.Params) (ret string) {
 	switch params["prop"] {
 	case "version":
-		ret = appInfo.App.Version
+		ret = app.Version
 	default:
 		ret = ""
 	}
