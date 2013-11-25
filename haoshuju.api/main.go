@@ -12,6 +12,7 @@ import (
 func main() {
 	m := martini.Classic()
 
+	m.Use(api.XRuntimeHandler)
 	m.Map(api.GetApiApp())
 	api.Routes(m)
 
