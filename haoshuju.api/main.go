@@ -7,13 +7,14 @@ import (
 
 	"github.com/codegangsta/martini"
 	"github.com/itang/haoshuju/haoshuju.api/api"
+	"github.com/itang/martinitang"
 )
 
 func main() {
 	m := martini.Classic()
 	app := api.GetApiApp()
 
-	m.Use(api.XRuntimeHandler)
+	m.Use(martinitang.XRuntime())
 	m.Map(app)
 	api.Routes(m)
 
