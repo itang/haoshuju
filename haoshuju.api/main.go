@@ -11,16 +11,16 @@ import (
 
 func main() {
 	m := martini.Classic()
+	app := api.GetApiApp()
 
 	m.Use(api.XRuntimeHandler)
-	m.Map(api.GetApiApp())
+	m.Map(app)
 	api.Routes(m)
 
-	run(m)
+	run(app, m)
 }
 
-func run(handler http.Handler) {
-	httpPort := api.GetApiApp().HttpPort
-	log.Printf("[martini] listening on port %d", httpPort)
-	http.ListenAndServe(fmt.Sprintf(":%d", httpPort), handler)
+func run(app api.ApiApp, handler http.Handler) {
+	log.Printf("[martini] listening on port %d, [%s]", app.HttpPort, app.Name)
+	http.ListenAndServe(fmt.Sprintf(":%d", app.HttpPort), handler)
 }
