@@ -8,4 +8,5 @@ func Routes(m martini.Router) {
 	m.Get("/", IndexHandler)
 	m.Get("/appinfo", AppInfoHandler)
 	m.Get("/appinfo/:prop", AppInfoPropHandler)
+	m.Get("/clientapps", ClientAppsHandler)
 }

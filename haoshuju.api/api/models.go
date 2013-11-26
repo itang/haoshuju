@@ -29,7 +29,15 @@ type RestApi struct {
 
 type ClientApp struct {
 	AppBase
-
 	AccessKey string `json:"accessKey"`
 	SecretKey string `json:"secretKey"`
+	Type      string `json:"type"`
 }
+
+type ClientAppType string
+
+const (
+	ClientAppTypeLocal = ClientAppType("local")
+
+	ClientAppTypeRemote = ClientAppType("remote")
+)

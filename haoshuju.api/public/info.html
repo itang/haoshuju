@@ -63,6 +63,17 @@
      </tr>
     </table>
 
+    <h3>Client Apps</h3>
+    <table class="table">
+      <tr><th>Name</th><th>AccessKey</th><th>SecretKey</th><th>Type</th></tr>
+      <tr ng-repeat="app in clientApps">
+       <td><a href="http://{{app.hostname}}:{{app.httpport}}" target="_blank">{{app.name}}</td>
+       <td>{{app.accessKey}}</td>
+       <td>{{app.secretKey}}</td>
+       <td>{{app.type}}</td>
+     </tr>
+    </table>
+
     </div> <!-- /container -->
 
     <!-- Bootstrap core JavaScript

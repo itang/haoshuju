@@ -25,6 +25,10 @@ func AppInfoPropHandler(app ApiApp, params martini.Params) (ret string) {
 	return
 }
 
+func ClientAppsHandler(resp http.ResponseWriter) {
+	renderJson(resp, GetClientApps())
+}
+
 //////////////////////////////////////////////////////
 // utils
 func renderJson(resp http.ResponseWriter, obj interface{}) {
