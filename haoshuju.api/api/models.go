@@ -14,6 +14,13 @@ const (
 	ARemote = AppType("remote")
 )
 
+type Status int
+
+const (
+	SValid Status = iota
+	SInValid
+)
+
 type AppBase struct {
 	Id          string    `json:"id"`
 	Name        string    `json:"name"`
@@ -22,8 +29,9 @@ type AppBase struct {
 	HttpPort    int       `json:"httpport"`
 	CreatedAt   time.Time `json:"createdAt"`
 	UpdatedAt   time.Time `json:"updatedAt"`
-	Description string    `json:"description"`
 	Type        AppType   `json:"type"`
+	Status      Status    `json:"status"`
+	Description string    `json:"description"`
 }
 
 type ApiApp struct {
@@ -31,19 +39,12 @@ type ApiApp struct {
 	RestApis []RestApi `json:"restApis"`
 }
 
-type ApiStatus int
-
-const (
-	SValid = iota
-	SInValid
-)
-
 type RestApi struct {
-	Name        string    `json:"name"`
-	Url         string    `json:"url"`
-	Method      string    `json:"method"`
-	Description string    `json:"description"`
-	Status      ApiStatus `json:"status"`
+	Name        string `json:"name"`
+	Url         string `json:"url"`
+	Method      string `json:"method"`
+	Description string `json:"description"`
+	Status      Status `json:"status"`
 }
 
 type ClientApp struct {
@@ -61,6 +62,7 @@ func GetClientApps() []ClientApp {
 			Hostname: "localhost",
 			HttpPort: 3000,
 			Type:     ARemote,
+			Status:   SValid,
 		},
 		AccessKey: uuidString(),
 		SecretKey: uuidString(),
