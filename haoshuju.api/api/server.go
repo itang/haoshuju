@@ -21,8 +21,8 @@ func NewMartiniServer() Server {
 	m := martini.Classic()
 
 	m.Use(martinitang.XRuntime())
-	// render html templates from templates directory
 	m.Use(render.Renderer("templates"))
+
 	m.Map(app)
 	routes(m)
 

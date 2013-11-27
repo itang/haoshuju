@@ -10,8 +10,7 @@ import (
 type AppType string
 
 const (
-	ALocal = AppType("local")
-
+	ALocal  = AppType("local")
 	ARemote = AppType("remote")
 )
 
@@ -32,11 +31,19 @@ type ApiApp struct {
 	RestApis []RestApi `json:"restApis"`
 }
 
+type ApiStatus int
+
+const (
+	SValid = iota
+	SInValid
+)
+
 type RestApi struct {
-	Name        string `json:"name"`
-	Url         string `json:"url"`
-	Method      string `json:"method"`
-	Description string `json:"description"`
+	Name        string    `json:"name"`
+	Url         string    `json:"url"`
+	Method      string    `json:"method"`
+	Description string    `json:"description"`
+	Status      ApiStatus `json:"status"`
 }
 
 type ClientApp struct {
