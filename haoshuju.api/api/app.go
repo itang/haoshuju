@@ -9,6 +9,7 @@ var (
 			Version:  "0.0.1",
 			Hostname: "localhost",
 			HttpPort: 5000,
+			Type:     ALocal,
 		},
 		[]RestApi{
 			{Name: "app info",
@@ -17,6 +18,10 @@ var (
 			},
 			{Name: "app info prop",
 				Url:    "/appinfo/:prop",
+				Method: "get",
+			},
+			{Name: "client apps",
+				Url:    "/clientapps",
 				Method: "get",
 			},
 		},

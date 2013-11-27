@@ -7,6 +7,14 @@ import (
 	"github.com/nu7hatch/gouuid"
 )
 
+type AppType string
+
+const (
+	ALocal = AppType("local")
+
+	ARemote = AppType("remote")
+)
+
 type AppBase struct {
 	Id          string    `json:"id"`
 	Name        string    `json:"name"`
@@ -16,6 +24,7 @@ type AppBase struct {
 	CreatedAt   time.Time `json:"createdAt"`
 	UpdatedAt   time.Time `json:"updatedAt"`
 	Description string    `json:"description"`
+	Type        AppType   `json:"type"`
 }
 
 type ApiApp struct {
@@ -34,16 +43,7 @@ type ClientApp struct {
 	AppBase
 	AccessKey string `json:"accessKey"`
 	SecretKey string `json:"secretKey"`
-	Type      string `json:"type"`
 }
-
-type ClientAppType string
-
-const (
-	ClientAppTypeLocal = ClientAppType("local")
-
-	ClientAppTypeRemote = ClientAppType("remote")
-)
 
 func GetClientApps() []ClientApp {
 	haoshujuNet := ClientApp{
@@ -53,10 +53,10 @@ func GetClientApps() []ClientApp {
 			Version:  "0.0.1",
 			Hostname: "localhost",
 			HttpPort: 3000,
+			Type:     ARemote,
 		},
 		AccessKey: uuidString(),
 		SecretKey: uuidString(),
-		Type:      string(ClientAppTypeLocal),
 	}
 	return []ClientApp{haoshujuNet}
 }
