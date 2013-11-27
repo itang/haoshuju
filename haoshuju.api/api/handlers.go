@@ -11,7 +11,7 @@ func IndexHandler(resp http.ResponseWriter, req *http.Request) {
 	http.Redirect(resp, req, "/info.html", http.StatusFound)
 }
 
-func AppInfoHandler(app ApiApp, r render.Render, resp http.ResponseWriter) {
+func AppInfoHandler(app ApiApp, r render.Render) {
 	r.JSON(200, app)
 }
 

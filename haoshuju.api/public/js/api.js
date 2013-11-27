@@ -7,7 +7,7 @@ api.getAppInfo = function(http, call){
 }
 
 api.getClientApps = function(http, call){
-  http.get("/clientapps").success(function(ret){
+  http.get("/client-apps").success(function(ret){
     call(ret);
     console.log(ret);
   });

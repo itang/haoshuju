@@ -24,7 +24,7 @@ func NewMartiniServer() Server {
 	m.Use(render.Renderer("templates"))
 
 	m.Map(app)
-	routes(m)
+	setRoutes(m)
 
 	return &martiniServer{app, m}
 }
