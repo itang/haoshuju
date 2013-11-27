@@ -1,18 +1,18 @@
 package api
 
 import (
-	"encoding/json"
 	"net/http"
 
 	"github.com/codegangsta/martini"
+	"github.com/codegangsta/martini-contrib/render"
 )
 
 func IndexHandler(resp http.ResponseWriter, req *http.Request) {
 	http.Redirect(resp, req, "/info.html", http.StatusFound)
 }
 
-func AppInfoHandler(app ApiApp, resp http.ResponseWriter) {
-	renderJson(resp, app)
+func AppInfoHandler(app ApiApp, r render.Render) {
+	r.JSON(200, app)
 }
 
 func AppInfoPropHandler(app ApiApp, params martini.Params) (ret string) {
@@ -25,13 +25,6 @@ func AppInfoPropHandler(app ApiApp, params martini.Params) (ret string) {
 	return
 }
 
-func ClientAppsHandler(resp http.ResponseWriter) {
-	renderJson(resp, GetClientApps())
-}
-
-//////////////////////////////////////////////////////
-// utils
-func renderJson(resp http.ResponseWriter, obj interface{}) {
-	resp.Header().Add("Content-Type", "application/json; charset=utf-8")
-	json.NewEncoder(resp).Encode(obj)
+func ClientAppsHandler(r render.Render) {
+	r.JSON(200, GetClientApps())
 }
