@@ -9,4 +9,5 @@ func setRoutes(m martini.Router) {
 	m.Get("/appinfo", AppInfoHandler)
 	m.Get("/appinfo/:prop", AppInfoPropHandler)
 	m.Get("/client-apps", ClientAppsHandler)
+  m.Get("/time", ServerTimeHandler)
 }

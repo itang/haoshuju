@@ -2,9 +2,11 @@ package api
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/codegangsta/martini"
 	"github.com/codegangsta/martini-contrib/render"
+	gtime "github.com/itang/gotang/time"
 )
 
 func IndexHandler(resp http.ResponseWriter, req *http.Request) {
@@ -27,4 +29,15 @@ func AppInfoPropHandler(app ApiApp, params martini.Params) (ret string) {
 
 func ClientAppsHandler(r render.Render) {
 	r.JSON(200, GetClientApps())
+}
+
+func ServerTimeHandler(r render.Render) {
+	now := time.Now()
+	r.JSON(200, struct {
+		Value int64  `json:"value"`
+		Str   string `json:"str"`
+	}{
+		now.Unix(),
+		gtime.FormatDefault(now),
+	})
 }

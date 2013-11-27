@@ -107,6 +107,11 @@ var (
 				Method: "get",
 				Status: SValid,
 			},
+			{Name: "server time",
+				Url:    "/time",
+				Method: "get",
+				Status: SValid,
+			},
 		},
 	}
 )
