@@ -13,5 +13,11 @@ haoshujuControllers.controller('AppInfoCtrl', ['$scope', '$http',
 
     api.getClientApps($http, function(apps){
       $scope.clientApps = apps;
+
+      for(var i =0; i<apps.length; i++){
+        api.checkHostAlive(apps[i].hostname + ":" + apps[i].httpport, i, $http, function(i, ret){
+          $scope.clientApps[i].alive = ret.alive;
+        });
+      }
     });
   }]);

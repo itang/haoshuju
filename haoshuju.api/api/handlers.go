@@ -41,3 +41,20 @@ func ServerTimeHandler(r render.Render) {
 		gtime.FormatDefault(now),
 	})
 }
+
+func AliveHandler() string {
+	return "true"
+}
+
+type checkResult struct {
+	Alive bool `json:"alive"`
+}
+
+func CheckHostAliveHandler(params martini.Params, r render.Render) {
+	hostaddr := params["hostaddr"]
+	if len(hostaddr) > 0 {
+		r.JSON(200, checkResult{CheckHostAlive(hostaddr)})
+	} else {
+		r.JSON(200, checkResult{false})
+	}
+}

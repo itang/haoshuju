@@ -28,7 +28,7 @@ type serverTime struct {
 }
 
 func (c App) ServerTime() revel.Result {
-	var restApiURL = "http://localhost:5000/time"
+	var restApiURL = "http://localhost:5000/api/time"
 	var st = serverTime{}
 	err := gotang.GetJSON(restApiURL, &st)
 	if err != nil {

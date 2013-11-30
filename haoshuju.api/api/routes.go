@@ -6,8 +6,10 @@ import (
 
 func setRoutes(m martini.Router) {
 	m.Get("/", IndexHandler)
-	m.Get("/appinfo", AppInfoHandler)
-	m.Get("/appinfo/:prop", AppInfoPropHandler)
-	m.Get("/client-apps", ClientAppsHandler)
-  m.Get("/time", ServerTimeHandler)
+	m.Get("/system/appinfo", AppInfoHandler)
+	m.Get("/system/appinfo/:prop", AppInfoPropHandler)
+	m.Get("/system/client-apps", ClientAppsHandler)
+	m.Get("/api/time", ServerTimeHandler)
+	m.Get("/api/alive", AliveHandler)
+	m.Get("/tool/check-hostaddr-alive/:hostaddr", CheckHostAliveHandler)
 }
