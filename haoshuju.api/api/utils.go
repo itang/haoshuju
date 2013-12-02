@@ -2,10 +2,17 @@ package api
 
 import (
 	"net/http"
+	"strings"
 )
 
+const httpPrefix = "http://"
+
 func CheckHostAlive(hostaddr string) bool {
-	_, err := http.Get("http://" + hostaddr)
+  hostHttpURL := hostaddr
+  if !strings.HasPrefix(hostHttpURL, httpPrefix){
+    hostHttpURL = httpPrefix + hostHttpURL
+  }
+	_, err := http.Get(hostHttpURL)
 	if err != nil {
 		return false
 	}
