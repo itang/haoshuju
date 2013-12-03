@@ -8,10 +8,10 @@ import (
 const httpPrefix = "http://"
 
 func CheckHostAlive(hostaddr string) bool {
-  hostHttpURL := hostaddr
-  if !strings.HasPrefix(hostHttpURL, httpPrefix){
-    hostHttpURL = httpPrefix + hostHttpURL
-  }
+	hostHttpURL := hostaddr
+	if !strings.HasPrefix(hostHttpURL, httpPrefix) {
+		hostHttpURL = httpPrefix + hostHttpURL
+	}
 	_, err := http.Get(hostHttpURL)
 	if err != nil {
 		return false
