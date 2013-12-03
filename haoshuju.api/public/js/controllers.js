@@ -8,7 +8,7 @@ haoshujuControllers.controller('AppInfoCtrl', ['$scope', '$http',
   function AppInfoCtrl($scope, $http) {
     api.getAppInfo($http, function(app){
       $scope.app = app;
-      $scope.restApis = app.restApis;
+      $scope.modules = app.modules;
     });
 
     api.getClientApps($http, function(apps){

@@ -58,9 +58,10 @@
       </tr>
     </table>
     <h3>REST APIs</h3>
-    <table class="table">
-      <tr><th>Name</th><th>Method</th><th>Url</th><th>Status</th></tr>
-      <tr ng-repeat="api in restApis">
+    <table class="table" ng-repeat="module in modules">
+      <caption>{{module.name}}</caption>
+      <tr><th width="10%">Name</th><th width="20%">Method</th><th width="30%">Url</th><th>Status</th></tr>
+      <tr ng-repeat="api in module.restApis">
        <td>{{api.name}}</td>
        <td>{{api.method}}</td>
        <td><a href="http://{{app.hostname}}:{{app.httpport}}{{api.url}}" target="_blank">{{api.url}}</td>
