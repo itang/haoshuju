@@ -5,9 +5,10 @@ import (
 	. "github.com/itang/haoshuju/haoshuju.api/modules"
 	"github.com/itang/haoshuju/haoshuju.api/modules/system"
 	"github.com/itang/haoshuju/haoshuju.api/services"
+	"github.com/itang/haoshuju/open"
 )
 
-func GetModuleRouter() ModuleRouter {
+func GetModuleRouter() open.ModuleRouter {
 	m := martini.Classic()
 	m.Handlers(martini.Logger(), martini.Recovery(), XRuntimeM, RenderM)
 
@@ -15,7 +16,7 @@ func GetModuleRouter() ModuleRouter {
 	m.Get("/appinfo/:prop", servicesInjector, AppInfoPropHandler)
 	m.Get("/client-apps", servicesInjector, ClientAppsHandler)
 
-	return ModuleRouter{system.GetModule(), m}
+	return open.ModuleRouter{system.GetModule(), m}
 }
 
 func servicesInjector(context martini.Context) {

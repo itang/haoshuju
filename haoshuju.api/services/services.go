@@ -6,11 +6,13 @@ import (
 	_ "github.com/itang/haoshuju/haoshuju.api/modules/index"
 	_ "github.com/itang/haoshuju/haoshuju.api/modules/system"
 	_ "github.com/itang/haoshuju/haoshuju.api/modules/tool"
+	"github.com/itang/haoshuju/open"
+	"github.com/itang/haoshuju/util"
 )
 
 type Services interface {
-	GetApiApp() modules.ApiApp
-	GetClientApps() []modules.ClientApp
+	GetApiApp() open.ApiApp
+	GetClientApps() []open.ClientApp
 }
 
 func GetDefaultServices() Services {
@@ -22,42 +24,42 @@ func GetDefaultServices() Services {
 type services struct {
 }
 
-func (this services) GetApiApp() modules.ApiApp {
+func (this services) GetApiApp() open.ApiApp {
 	return apiApp
 }
 
-func (this services) GetClientApps() []modules.ClientApp {
-	haoshujuNet := modules.ClientApp{
-		AppBase: modules.AppBase{
-			Module: modules.Module{
+func (this services) GetClientApps() []open.ClientApp {
+	haoshujuNet := open.ClientApp{
+		AppBase: open.AppBase{
+			Module: open.Module{
 				Id:      "haoshuju.net",
 				Name:    "haoshuju.net",
 				Path:    "/",
 				Version: "0.0.1",
-				Status:  modules.SValid,
+				Status:  open.SValid,
 			},
 			Hostname: "localhost",
 			HttpPort: 3000,
-			Type:     modules.ARemote,
+			Type:     open.ARemote,
 		},
-		AccessKey: modules.UUID(),
-		SecretKey: modules.UUID(),
+		AccessKey: util.UUID(),
+		SecretKey: util.UUID(),
 	}
-	return []modules.ClientApp{haoshujuNet}
+	return []open.ClientApp{haoshujuNet}
 }
 
 var (
 	appId  = "haoshuju.api"
-	apiApp = modules.ApiApp(
-		modules.AppBase{
-			Module: modules.Module{
+	apiApp = open.ApiApp(
+		open.AppBase{
+			Module: open.Module{
 				Id:      appId,
 				Name:    appId,
 				Version: "0.0.1",
 			},
 			Hostname: "localhost",
 			HttpPort: 5000,
-			Type:     modules.ALocal,
+			Type:     open.ALocal,
 			Modules:  modules.GetModules(),
 		})
 )

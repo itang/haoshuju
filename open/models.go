@@ -1,4 +1,4 @@
-package modules
+package open
 
 import (
 	"net/http"

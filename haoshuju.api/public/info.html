@@ -16,7 +16,8 @@
     <!-- Custom styles for this template -->
     <link href="/public/css/app.css" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.2/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.2/angular.min.js"></script>
+    <script src="http://getbootstrap.com/dist/js/bootstrap.js"></script>
     <script src="/public/js/app.js"></script>
     <script src="/public/js/api.js"></script>
     <script src="/public/js/controllers.js"></script>
@@ -47,7 +48,18 @@
         <div class="col-md-4">.col-md-4</div>
       </div>
 -->
-    <h3>AppInfo</h3>
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#appinfo" data-toggle="tab">AppInfo</a></li>
+  <li><a href="#modules" data-toggle="tab">Modules</a></li>
+  <li><a href="#rest-apis" data-toggle="tab">REST APIs</a></li>
+  <li><a href="#client-apps" data-toggle="tab">Client Apps</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="appinfo">
     <table class="table">
       <tr><th>Name</th><th>Version</th><th>Hostname</th><th>Http Port</th></tr>
       <tr>
@@ -57,41 +69,43 @@
         <td>{{app.httpport}}</td>
       </tr>
     </table>
-    <h3>Modules</h3>
+  </div>
+  <div class="tab-pane" id="modules">
     <table class="table">
       <tr><th width="20%">Name</th><th width="20%">Path</th><th>Status</th></tr>
       <tr ng-repeat="module in modules">
        <td>{{module.name}}</td>
        <td>{{module.path}}</td>
-       <td><a href="http://{{app.hostname}}:{{app.httpport}}{{api.url}}" target="_blank">{{api.url}}</td>
        <td title="{{module.status}}">{{module.status | statusName}}</td>
      </tr>
-    </table>
-    <h3>REST APIs</h3>
-    <table class="table" ng-repeat="module in modules">
-      <caption>{{module.name}}</caption>
-      <tr><th width="20%">Name</th><th width="20%">Method</th><th width="30%">Url</th><th>Status</th></tr>
-      <tr ng-repeat="api in module.restApis">
-       <td>{{api.name}}</td>
-       <td>{{api.method}}</td>
-       <td><a href="http://{{app.hostname}}:{{app.httpport}}{{api.url}}" target="_blank">{{api.url}}</td>
-       <td title="{{api.status}}">{{api.status | statusName}}</td>
-     </tr>
-    </table>
-
-    <h3>Client Apps</h3>
-    <table class="table">
-      <tr><th>Name</th><th>AccessKey</th><th>SecretKey</th><th>Type</th><th>Status</th><th>Alive?</th></tr>
-      <tr ng-repeat="app in clientApps">
-       <td><a href="http://{{app.hostname}}:{{app.httpport}}" target="_blank">{{app.name}}</td>
-       <td>{{app.accessKey}}</td>
-       <td>{{app.secretKey}}</td>
-       <td>{{app.type}}</td>
-       <td title="{{app.status}}">{{app.status | statusName}}</td>
-       <td>{{app.alive}}</td>
-     </tr>
-    </table>
-
+   </table>
+ </div>
+ <div class="tab-pane" id="rest-apis">
+   <table class="table" ng-repeat="module in modules">
+    <caption>{{module.name}}</caption>
+    <tr><th width="15%">Name</th><th width="15%">Method</th><th width="40%">Url</th><th>Status</th></tr>
+    <tr ng-repeat="api in module.restApis">
+     <td>{{api.name}}</td>
+     <td>{{api.method | uppercase}}</td>
+     <td><a href="http://{{app.hostname}}:{{app.httpport}}{{api.url}}" target="_blank">http://{{app.hostname}}:{{app.httpport}}{{api.url}}</td>
+     <td title="{{api.status}}">{{api.status | statusName}}</td>
+   </tr>
+ </table>
+</div>
+<div class="tab-pane" id="client-apps">
+  <table class="table">
+    <tr><th>Name</th><th>AccessKey</th><th>SecretKey</th><th>Type</th><th>Status</th><th>Alive?</th></tr>
+    <tr ng-repeat="app in clientApps">
+     <td><a href="http://{{app.hostname}}:{{app.httpport}}" target="_blank">{{app.name}}</td>
+     <td>{{app.accessKey}}</td>
+     <td>{{app.secretKey}}</td>
+     <td>{{app.type}}</td>
+     <td title="{{app.status}}">{{app.status | statusName}}</td>
+     <td>{{app.alive}}</td>
+   </tr>
+ </table>
+</div>
+</div>
     <br/>
     </div> <!-- /container -->
 
