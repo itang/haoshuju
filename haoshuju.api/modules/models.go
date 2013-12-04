@@ -1,6 +1,7 @@
 package modules
 
 import (
+	"net/http"
 	"time"
 )
 
@@ -36,6 +37,11 @@ type Module struct {
 	Status      Status    `json:"status"`
 	Description string    `json:"description"`
 	RestApis    []RestApi `json:"restApis"`
+}
+
+type ModuleRouter struct {
+	Module  Module
+	Handler http.Handler
 }
 
 type AppBase struct {

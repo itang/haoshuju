@@ -16,11 +16,11 @@ func GetModule() Module {
 	}
 }
 
-func GetHandler() *martini.ClassicMartini {
+func GetModuleRouter() ModuleRouter {
 	m := martini.Classic()
 	m.Handlers(martini.Recovery(), XRuntimeM)
 
 	m.Get("/", IndexHandler)
 
-	return m
+	return ModuleRouter{GetModule(), m}
 }

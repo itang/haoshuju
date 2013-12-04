@@ -1,14 +1,13 @@
 package handlers
 
 import (
-	"net/http"
-
 	"github.com/codegangsta/martini"
 	. "github.com/itang/haoshuju/haoshuju.api/modules"
+	"github.com/itang/haoshuju/haoshuju.api/modules/system"
 	"github.com/itang/haoshuju/haoshuju.api/services"
 )
 
-func GetHandler() http.Handler {
+func GetModuleRouter() ModuleRouter {
 	m := martini.Classic()
 	m.Handlers(martini.Logger(), martini.Recovery(), XRuntimeM, RenderM)
 
@@ -16,7 +15,7 @@ func GetHandler() http.Handler {
 	m.Get("/appinfo/:prop", servicesInjector, AppInfoPropHandler)
 	m.Get("/client-apps", servicesInjector, ClientAppsHandler)
 
-	return m
+	return ModuleRouter{system.GetModule(), m}
 }
 
 func servicesInjector(context martini.Context) {

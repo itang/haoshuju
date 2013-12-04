@@ -7,6 +7,7 @@ import (
 
 	"github.com/codegangsta/martini"
 	"github.com/codegangsta/martini-contrib/strip"
+	"github.com/itang/gotang"
 	. "github.com/itang/haoshuju/haoshuju.api/modules"
 
 	"github.com/itang/haoshuju/haoshuju.api/modules/api"
@@ -24,20 +25,34 @@ type Server interface {
 
 func NewMartiniServer() Server {
 	app := services.GetDefaultServices().GetApiApp()
-	m := index.GetHandler()
 
-	m.Get("/public/.*", strip.Prefix("/public"), staticHandler().ServeHTTP)
-	m.Get("/api/.*", strip.Prefix("/api"), api.GetHandler().ServeHTTP)
-	m.Get("/tool/.*", strip.Prefix("/tool"), tool.GetHandler().ServeHTTP)
-	m.Get("/system/.*", strip.Prefix("/system"), system.GetHandler().ServeHTTP)
+	m, ok := index.GetModuleRouter().Handler.(*martini.ClassicMartini)
+	gotang.Assert(ok, "should be martini handler")
+
+	mountModules(m)
 
 	return &martiniServer{app, m}
 }
 
-func staticHandler() http.Handler {
+func mountModules(m *martini.ClassicMartini) {
+	mrs := []ModuleRouter{api.GetModuleRouter(),
+		system.GetModuleRouter(),
+		tool.GetModuleRouter(),
+		publicModuleRouter(),
+	}
+	for _, mr := range mrs {
+		m.Any(mr.Module.Path+"/.*", strip.Prefix(mr.Module.Path), mr.Handler.ServeHTTP)
+	}
+}
+
+func publicModuleRouter() ModuleRouter {
+	module := Module{
+		Name: "public",
+		Path: "/public",
+	}
 	m := martini.Classic()
 	m.Handlers(martini.Recovery(), martini.Static("public"))
-	return m
+	return ModuleRouter{module, m}
 }
 
 type martiniServer struct {

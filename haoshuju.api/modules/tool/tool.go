@@ -1,8 +1,6 @@
 package tool
 
 import (
-	"net/http"
-
 	"github.com/codegangsta/martini"
 	. "github.com/itang/haoshuju/haoshuju.api/modules"
 )
@@ -25,11 +23,11 @@ func GetModule() Module {
 	}
 }
 
-func GetHandler() http.Handler {
+func GetModuleRouter() ModuleRouter {
 	m := martini.Classic()
 	m.Handlers(martini.Logger(), martini.Recovery(), XRuntimeM, RenderM)
 
 	m.Get("/check-hostaddr-alive/:hostaddr", CheckHostAliveHandler)
 
-	return m
+	return ModuleRouter{GetModule(), m}
 }
