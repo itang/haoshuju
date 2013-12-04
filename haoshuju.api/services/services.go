@@ -1,7 +1,7 @@
 package services
 
 import (
-	 "github.com/itang/haoshuju/haoshuju.api/modules"
+	"github.com/itang/haoshuju/haoshuju.api/modules"
 	_ "github.com/itang/haoshuju/haoshuju.api/modules/api"
 	_ "github.com/itang/haoshuju/haoshuju.api/modules/index"
 	_ "github.com/itang/haoshuju/haoshuju.api/modules/system"
@@ -58,6 +58,6 @@ var (
 			Hostname: "localhost",
 			HttpPort: 5000,
 			Type:     modules.ALocal,
-			Modules: modules.GetModules(),
+			Modules:  modules.GetModules(),
 		})
 )

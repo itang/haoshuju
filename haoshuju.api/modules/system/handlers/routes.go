@@ -4,14 +4,13 @@ import (
 	"net/http"
 
 	"github.com/codegangsta/martini"
-	"github.com/itang/haoshuju/haoshuju.api/modules"
+	. "github.com/itang/haoshuju/haoshuju.api/modules"
 	"github.com/itang/haoshuju/haoshuju.api/services"
 )
 
 func GetHandler() http.Handler {
 	m := martini.Classic()
-	m.Use(modules.XRuntimeM)
-	m.Use(modules.RenderM)
+	m.Handlers(martini.Logger(), martini.Recovery(), XRuntimeM, RenderM)
 
 	m.Get("/appinfo", servicesInjector, AppInfoHandler)
 	m.Get("/appinfo/:prop", servicesInjector, AppInfoPropHandler)

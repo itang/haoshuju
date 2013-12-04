@@ -32,8 +32,7 @@ func GetModule() Module {
 
 func GetHandler() http.Handler {
 	m := martini.Classic()
-	m.Use(XRuntimeM)
-	m.Use(RenderM)
+	m.Handlers(martini.Recovery(), XRuntimeM, RenderM)
 
 	m.Get("/time", ServerTimeHandler)
 	m.Get("/alive", AliveHandler)

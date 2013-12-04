@@ -5,5 +5,5 @@ import (
 )
 
 func IndexHandler(resp http.ResponseWriter, req *http.Request) {
-	http.Redirect(resp, req, "/info.html", http.StatusFound)
+	http.Redirect(resp, req, "/public/info.html", http.StatusFound)
 }

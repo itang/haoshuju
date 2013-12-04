@@ -18,8 +18,7 @@ func GetModule() Module {
 
 func GetHandler() *martini.ClassicMartini {
 	m := martini.Classic()
-	m.Use(XRuntimeM)
-	m.Use(RenderM)
+	m.Handlers(martini.Recovery(), XRuntimeM)
 
 	m.Get("/", IndexHandler)
 

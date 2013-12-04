@@ -26,11 +26,18 @@ func NewMartiniServer() Server {
 	app := services.GetDefaultServices().GetApiApp()
 	m := index.GetHandler()
 
+	m.Get("/public/.*", strip.Prefix("/public"), staticHandler().ServeHTTP)
 	m.Get("/api/.*", strip.Prefix("/api"), api.GetHandler().ServeHTTP)
 	m.Get("/tool/.*", strip.Prefix("/tool"), tool.GetHandler().ServeHTTP)
 	m.Get("/system/.*", strip.Prefix("/system"), system.GetHandler().ServeHTTP)
 
 	return &martiniServer{app, m}
+}
+
+func staticHandler() http.Handler {
+	m := martini.Classic()
+	m.Handlers(martini.Recovery(), martini.Static("public"))
+	return m
 }
 
 type martiniServer struct {

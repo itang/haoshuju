@@ -9,13 +9,13 @@ var (
 	XRuntimeM = martinitang.XRuntime()
 	RenderM   = render.Renderer("templates")
 
-  modules = []Module{}
+	modules = []Module{}
 )
 
 func RegistModule(module Module) {
-  modules =  append(modules, module)
+	modules = append(modules, module)
 }
 
 func GetModules() []Module {
-  return modules
+	return modules
 }

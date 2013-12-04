@@ -27,8 +27,7 @@ func GetModule() Module {
 
 func GetHandler() http.Handler {
 	m := martini.Classic()
-	m.Use(XRuntimeM)
-	m.Use(RenderM)
+	m.Handlers(martini.Logger(), martini.Recovery(), XRuntimeM, RenderM)
 
 	m.Get("/check-hostaddr-alive/:hostaddr", CheckHostAliveHandler)
 
