@@ -1,4 +1,4 @@
-package app
+package server
 
 import (
 	"fmt"
@@ -23,7 +23,7 @@ type Server interface {
 }
 
 func NewMartiniServer() Server {
-	app := services.GetApiApp()
+	app := services.GetDefaultServices().GetApiApp()
 	m := index.GetHandler()
 
 	m.Get("/api/.*", strip.Prefix("/api"), api.GetHandler().ServeHTTP)

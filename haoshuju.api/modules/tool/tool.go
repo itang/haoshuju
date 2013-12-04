@@ -4,10 +4,12 @@ import (
 	"net/http"
 
 	"github.com/codegangsta/martini"
-	"github.com/codegangsta/martini-contrib/render"
 	. "github.com/itang/haoshuju/haoshuju.api/modules"
-	"github.com/itang/martinitang"
 )
+
+func init() {
+	RegistModule(GetModule())
+}
 
 func GetModule() Module {
 	return Module{
@@ -24,13 +26,11 @@ func GetModule() Module {
 }
 
 func GetHandler() http.Handler {
-	xruntimeM := martinitang.XRuntime()
-	renderM := render.Renderer("templates")
-
 	m := martini.Classic()
+	m.Use(XRuntimeM)
+	m.Use(RenderM)
 
-	m.Use(xruntimeM)
-	m.Use(renderM)
 	m.Get("/check-hostaddr-alive/:hostaddr", CheckHostAliveHandler)
+
 	return m
 }

@@ -4,6 +4,10 @@ import (
 	. "github.com/itang/haoshuju/haoshuju.api/modules"
 )
 
+func init() {
+	RegistModule(GetModule())
+}
+
 func GetModule() Module {
 	return Module{
 		Name: "system",

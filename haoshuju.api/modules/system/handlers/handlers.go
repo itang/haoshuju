@@ -1,44 +1,26 @@
 package handlers
 
 import (
-	"net/http"
-
 	"github.com/codegangsta/martini"
 	"github.com/codegangsta/martini-contrib/render"
 	"github.com/itang/haoshuju/haoshuju.api/services"
-	"github.com/itang/martinitang"
 )
 
-func AppInfoHandler(r render.Render) {
+func AppInfoHandler(services services.Services, r render.Render) {
 	r.JSON(200, services.GetApiApp())
 }
 
-func AppInfoPropHandler(params martini.Params) (ret string) {
+func AppInfoPropHandler(services services.Services, params martini.Params) (ret string) {
+	apiApp := services.GetApiApp()
 	switch params["prop"] {
 	case "version":
-		ret = services.GetApiApp().Version
+		ret = apiApp.Version
 	default:
 		ret = ""
 	}
 	return
 }
 
-func ClientAppsHandler(r render.Render) {
+func ClientAppsHandler(services services.Services, r render.Render) {
 	r.JSON(200, services.GetClientApps())
-}
-
-func GetHandler() http.Handler {
-	xruntimeM := martinitang.XRuntime()
-	renderM := render.Renderer("templates")
-
-	m := martini.Classic()
-
-	m.Use(xruntimeM)
-	m.Use(renderM)
-
-	m.Get("/appinfo", AppInfoHandler)
-	m.Get("/appinfo/:prop", AppInfoPropHandler)
-	m.Get("/client-apps", ClientAppsHandler)
-
-	return m
 }

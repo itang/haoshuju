@@ -57,10 +57,20 @@
         <td>{{app.httpport}}</td>
       </tr>
     </table>
+    <h3>Modules</h3>
+    <table class="table">
+      <tr><th width="20%">Name</th><th width="20%">Path</th><th>Status</th></tr>
+      <tr ng-repeat="module in modules">
+       <td>{{module.name}}</td>
+       <td>{{module.path}}</td>
+       <td><a href="http://{{app.hostname}}:{{app.httpport}}{{api.url}}" target="_blank">{{api.url}}</td>
+       <td title="{{module.status}}">{{module.status | statusName}}</td>
+     </tr>
+    </table>
     <h3>REST APIs</h3>
     <table class="table" ng-repeat="module in modules">
       <caption>{{module.name}}</caption>
-      <tr><th width="10%">Name</th><th width="20%">Method</th><th width="30%">Url</th><th>Status</th></tr>
+      <tr><th width="20%">Name</th><th width="20%">Method</th><th width="30%">Url</th><th>Status</th></tr>
       <tr ng-repeat="api in module.restApis">
        <td>{{api.name}}</td>
        <td>{{api.method}}</td>

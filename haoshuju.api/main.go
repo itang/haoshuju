@@ -3,12 +3,12 @@ package main
 import (
 	"runtime"
 
-	"github.com/itang/haoshuju/haoshuju.api/app"
+	"github.com/itang/haoshuju/haoshuju.api/server"
 )
 
 func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
-	var server app.Server = app.NewMartiniServer()
+	server := server.NewMartiniServer()
 	server.Run()
 }

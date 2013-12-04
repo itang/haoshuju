@@ -1,62 +1,63 @@
 package services
 
 import (
-	"github.com/itang/gotang"
-	. "github.com/itang/haoshuju/haoshuju.api/modules"
-	"github.com/itang/haoshuju/haoshuju.api/modules/api"
-	"github.com/itang/haoshuju/haoshuju.api/modules/index"
-	"github.com/itang/haoshuju/haoshuju.api/modules/system"
-	"github.com/itang/haoshuju/haoshuju.api/modules/tool"
-	"github.com/nu7hatch/gouuid"
+	 "github.com/itang/haoshuju/haoshuju.api/modules"
+	_ "github.com/itang/haoshuju/haoshuju.api/modules/api"
+	_ "github.com/itang/haoshuju/haoshuju.api/modules/index"
+	_ "github.com/itang/haoshuju/haoshuju.api/modules/system"
+	_ "github.com/itang/haoshuju/haoshuju.api/modules/tool"
 )
 
-func GetClientApps() []ClientApp {
-	haoshujuNet := ClientApp{
-		AppBase: AppBase{
-			Module: Module{
+type Services interface {
+	GetApiApp() modules.ApiApp
+	GetClientApps() []modules.ClientApp
+}
+
+func GetDefaultServices() Services {
+	return &services{}
+}
+
+///////////////////////////////////////////////////////////////////////////
+// private
+type services struct {
+}
+
+func (this services) GetApiApp() modules.ApiApp {
+	return apiApp
+}
+
+func (this services) GetClientApps() []modules.ClientApp {
+	haoshujuNet := modules.ClientApp{
+		AppBase: modules.AppBase{
+			Module: modules.Module{
 				Id:      "haoshuju.net",
 				Name:    "haoshuju.net",
 				Path:    "/",
 				Version: "0.0.1",
-				Status:  SValid,
+				Status:  modules.SValid,
 			},
 			Hostname: "localhost",
 			HttpPort: 3000,
-			Type:     ARemote,
+			Type:     modules.ARemote,
 		},
-		AccessKey: uuidString(),
-		SecretKey: uuidString(),
+		AccessKey: modules.UUID(),
+		SecretKey: modules.UUID(),
 	}
-	return []ClientApp{haoshujuNet}
-}
-
-func GetApiApp() ApiApp {
-	return apiApp
-}
-
-func uuidString() string {
-	u4, err := uuid.NewV4()
-	gotang.AssertNoError(err)
-	return u4.String()
+	return []modules.ClientApp{haoshujuNet}
 }
 
 var (
 	appId  = "haoshuju.api"
-	apiApp = ApiApp(
-		AppBase{
-			Module: Module{
+	apiApp = modules.ApiApp(
+		modules.AppBase{
+			Module: modules.Module{
 				Id:      appId,
 				Name:    appId,
 				Version: "0.0.1",
 			},
 			Hostname: "localhost",
 			HttpPort: 5000,
-			Type:     ALocal,
-			Modules: []Module{
-				api.GetModule(),
-				index.GetModule(),
-				system.GetModule(),
-				tool.GetModule(),
-			},
+			Type:     modules.ALocal,
+			Modules: modules.GetModules(),
 		})
 )
