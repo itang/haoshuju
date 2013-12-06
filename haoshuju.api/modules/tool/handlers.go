@@ -3,7 +3,7 @@ package tool
 import (
 	"github.com/codegangsta/martini"
 	"github.com/codegangsta/martini-contrib/render"
-	"github.com/itang/haoshuju/haoshuju.api/modules"
+	"github.com/itang/haoshuju/util"
 )
 
 type checkResult struct {
@@ -13,7 +13,7 @@ type checkResult struct {
 func CheckHostAliveHandler(params martini.Params, r render.Render) {
 	hostaddr := params["hostaddr"]
 	if len(hostaddr) > 0 {
-		r.JSON(200, checkResult{modules.CheckHostAlive(hostaddr)})
+		r.JSON(200, checkResult{util.CheckHostAlive(hostaddr)})
 	} else {
 		r.JSON(200, checkResult{false})
 	}
