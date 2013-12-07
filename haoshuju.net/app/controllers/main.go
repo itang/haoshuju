@@ -5,7 +5,9 @@ import (
 
 	"github.com/itang/gotang"
 	gtime "github.com/itang/gotang/time"
+	"github.com/itang/haoshuju/haoshuju.api/modules/api/data"
 	"github.com/itang/haoshuju/haoshuju.net/app"
+	"github.com/itang/haoshuju/open"
 	"github.com/robfig/revel"
 )
 
@@ -19,21 +21,15 @@ func (c App) Index() revel.Result {
 }
 
 func (c App) Version() revel.Result {
-	return c.RenderJson(Message{Level: "success", Data: app.VERSION})
-}
-
-type serverTime struct {
-	Value int64  `json:"value"`
-	Str   string `json:"str"`
+	return c.RenderJson(open.RestResponse{Data: app.VERSION})
 }
 
 func (c App) ServerTime() revel.Result {
-	var restApiURL = "http://localhost:5000/api/time"
-	var st = serverTime{}
-	err := gotang.GetJSON(restApiURL, &st)
-	if err != nil {
+	restApiURL := "http://localhost:5000/api/time"
+	resp := data.ServerTimeResponse{}
+	if err := gotang.GetJSON(restApiURL, &resp); err != nil {
 		revel.WARN.Printf("get %s, error:%v", restApiURL, err)
-		return c.RenderJson(Message{Level: "failture", Data: "unknow"})
+		return c.RenderJson(open.RestResponse{Code: 1, Data: "unknown"})
 	}
-	return c.RenderJson(Message{Level: "success", Data: st.Str})
+	return c.RenderJson(resp)
 }

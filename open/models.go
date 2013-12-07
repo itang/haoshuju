@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+// App type
 type AppType string
 
 const (
@@ -15,8 +16,8 @@ const (
 type Status int
 
 const (
-	SValid Status = iota
-	SInValid
+	SValid   Status = iota // 0
+	SInValid               // 1
 )
 
 type RestApi struct {
@@ -44,7 +45,7 @@ type ModuleRouter struct {
 	Handler http.Handler
 }
 
-type AppBase struct {
+type App struct {
 	Module
 	Hostname string   `json:"hostname"`
 	HttpPort int      `json:"httpport"`
@@ -52,10 +53,22 @@ type AppBase struct {
 	Modules  []Module `json:"modules"`
 }
 
-type ApiApp AppBase
+type ApiApp App
 
 type ClientApp struct {
-	AppBase
+	App
 	AccessKey string `json:"accessKey"`
 	SecretKey string `json:"secretKey"`
+}
+
+type RestResponseBase struct {
+	Code    int    `json:"code"`
+	Message string `json:"message"`
+	//Data interface {} `json:"data"`
+}
+
+type RestResponse struct {
+	Code    int         `json:"code"`
+	Message string      `json:"message"`
+	Data    interface{} `json:"data"`
 }

@@ -30,7 +30,7 @@ func (this services) GetApiApp() open.ApiApp {
 
 func (this services) GetClientApps() []open.ClientApp {
 	haoshujuNet := open.ClientApp{
-		AppBase: open.AppBase{
+		App: open.App{
 			Module: open.Module{
 				Id:      "haoshuju.net",
 				Name:    "haoshuju.net",
@@ -51,7 +51,7 @@ func (this services) GetClientApps() []open.ClientApp {
 var (
 	appId  = "haoshuju.api"
 	apiApp = open.ApiApp(
-		open.AppBase{
+		open.App{
 			Module: open.Module{
 				Id:      appId,
 				Name:    appId,

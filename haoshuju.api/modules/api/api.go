@@ -3,6 +3,7 @@ package api
 import (
 	"github.com/codegangsta/martini"
 	. "github.com/itang/haoshuju/haoshuju.api/modules"
+	"github.com/itang/haoshuju/haoshuju.api/modules/api/handlers"
 	"github.com/itang/haoshuju/open"
 )
 
@@ -33,8 +34,8 @@ func GetModuleRouter() open.ModuleRouter {
 	m := martini.Classic()
 	m.Handlers(martini.Recovery(), XRuntimeM, RenderM)
 
-	m.Get("/time", ServerTimeHandler)
-	m.Get("/alive", AliveHandler)
+	m.Get("/time", handlers.ServerTimeHandler)
+	m.Get("/alive", handlers.AliveHandler)
 
 	return open.ModuleRouter{GetModule(), m}
 }
