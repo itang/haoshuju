@@ -1,8 +1,11 @@
 package tool
 
 import (
+	"net/url"
+
 	"github.com/codegangsta/martini"
 	"github.com/codegangsta/martini-contrib/render"
+	"github.com/itang/haoshuju/open"
 	"github.com/itang/haoshuju/util"
 )
 
@@ -11,10 +14,30 @@ type checkResult struct {
 }
 
 func CheckHostAliveHandler(params martini.Params, r render.Render) {
-	hostaddr := params["hostaddr"]
-	if len(hostaddr) > 0 {
-		r.JSON(200, checkResult{util.CheckHostAlive(hostaddr)})
+	var (
+		hostaddr = params["hostaddr"]
+		alive    = false
+		code     = 0
+		message  = ""
+		err      = isValidHostAddr(hostaddr)
+	)
+
+	if err == nil {
+		alive = util.CheckHostAlive(hostaddr)
 	} else {
-		r.JSON(200, checkResult{false})
+		code = 1
+		message = err.Error()
 	}
+
+	r.JSON(200, open.RestResponse{
+		Code:    code,
+		Message: message,
+		Data:    checkResult{alive},
+	})
+}
+
+func isValidHostAddr(s string) error {
+	//TODO
+	_, err := url.Parse(s)
+	return err
 }
