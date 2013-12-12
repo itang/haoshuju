@@ -22,7 +22,11 @@ haoshujuControllers.controller('AppInfoCtrl', ['$scope', '$http',
 
       for(var i =0; i<apps.length; i++){
         api.checkHostAlive(apps[i].hostname + ":" + apps[i].httpport, i, $http, function(i, ret){
-          $scope.clientApps[i].alive = ret.alive;
+          if(ret.code == 0) {
+            $scope.clientApps[i].alive = ret.data.alive;
+          }else {
+            $scope.clientApps[i].alive = "unknown";
+          }
         });
       }
     });
