@@ -87,7 +87,7 @@
     <tr ng-repeat="api in module.restApis">
      <td>{{api.name}}</td>
      <td>{{api.method | uppercase}}</td>
-     <td><a href="http://{{app.hostname}}:{{app.httpport}}{{api.url}}" target="_blank">http://{{app.hostname}}:{{app.httpport}}{{api.url}}</td>
+     <td><a href="{{forURL(app, api)}}" target="_blank">{{forURL(app, api)}}</td>
      <td title="{{api.status}}">{{api.status | statusName}}</td>
    </tr>
  </table>
@@ -96,7 +96,7 @@
   <table class="table">
     <tr><th>Name</th><th>AccessKey</th><th>SecretKey</th><th>Type</th><th>Status</th><th>Alive?</th></tr>
     <tr ng-repeat="app in clientApps">
-     <td><a href="http://{{app.hostname}}:{{app.httpport}}" target="_blank">{{app.name}}</td>
+     <td><a href="{{forURL(app)}}" target="_blank">{{app.name}}</td>
      <td>{{app.accessKey}}</td>
      <td>{{app.secretKey}}</td>
      <td>{{app.type}}</td>

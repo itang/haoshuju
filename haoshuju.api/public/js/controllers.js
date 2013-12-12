@@ -6,6 +6,12 @@ var haoshujuControllers = angular.module('haoshujuControllers', []);
 
 haoshujuControllers.controller('AppInfoCtrl', ['$scope', '$http',
   function AppInfoCtrl($scope, $http) {
+    $scope.forURL = function(app, restApi) {
+      var portstr = (app.httpport == 80 ? "" : ":" + app.httpport);
+
+      return "http://" + app.hostname + portstr + (restApi ? restApi.url : "");
+    }
+
     api.getAppInfo($http, function(app){
       $scope.app = app;
       $scope.modules = app.modules;

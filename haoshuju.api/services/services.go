@@ -1,6 +1,10 @@
 package services
 
 import (
+	"os"
+	"strconv"
+
+	"github.com/itang/gotang"
 	"github.com/itang/haoshuju/haoshuju.api/modules"
 	_ "github.com/itang/haoshuju/haoshuju.api/modules/api"
 	_ "github.com/itang/haoshuju/haoshuju.api/modules/index"
@@ -57,9 +61,19 @@ var (
 				Name:    appId,
 				Version: "0.0.1",
 			},
-			Hostname: "localhost",
-			HttpPort: 5000,
+			Hostname: "haoshuju.net",
+			HttpPort: getPortFromEnv(),
 			Type:     open.ALocal,
 			Modules:  modules.GetModules(),
 		})
 )
+
+func getPortFromEnv() int {
+	port := os.Getenv("PORT")
+	if port != "" {
+		iport, err := strconv.Atoi(port)
+		gotang.AssertNoError(err)
+		return iport
+	}
+	return 5000
+}
