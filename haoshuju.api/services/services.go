@@ -62,18 +62,18 @@ var (
 				Version: "0.0.1",
 			},
 			Hostname: "haoshuju.net",
-			HttpPort: getPortFromEnv(),
+			HttpPort: portFromEnvOr(5000),
 			Type:     open.ALocal,
 			Modules:  modules.GetModules(),
 		})
 )
 
-func getPortFromEnv() int {
+func portFromEnvOr(defaultPort int) int {
 	port := os.Getenv("PORT")
-	if port != "" {
-		iport, err := strconv.Atoi(port)
-		gotang.AssertNoError(err)
-		return iport
+	if len(port) == 0 {
+		return defaultPort
 	}
-	return 5000
+	iport, err := strconv.Atoi(port)
+	gotang.AssertNoError(err)
+	return iport
 }
