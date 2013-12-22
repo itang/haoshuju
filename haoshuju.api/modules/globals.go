@@ -12,6 +12,7 @@ var (
 	XRuntimeM = martinitang.XRuntime()
 
 	RenderM = render.Renderer(render.Options{
+		Delims:    render.Delims{"{[{", "}]}"},
 		Directory:  "templates",                // specify what path to load the templates from
 		Layout:     "layout",                   // specify a layout template. Layouts can call {{ yield }} to render the current template.
 		Extensions: []string{".tmpl", ".html"}, // Specify extensions to load for templates
