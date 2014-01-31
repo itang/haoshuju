@@ -1,0 +1,66 @@
+<div class="container" ng-controller="AppInfoCtrl">
+
+  <div class="page-header">
+    <h1>Haoshuju API Platform</h1>
+    <p class="lead">Haoshuju API Platform.</p>
+  </div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#appinfo" data-toggle="tab">AppInfo</a></li>
+    <li><a href="#modules" data-toggle="tab">Modules</a></li>
+    <li><a href="#rest-apis" data-toggle="tab">REST APIs</a></li>
+    <li><a href="#client-apps" data-toggle="tab">Client Apps</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div class="tab-pane active" id="appinfo">
+      <table class="table">
+        <tr><th>Name</th><th>Version</th><th>Hostname</th><th>Http Port</th></tr>
+        <tr>
+          <td>{{app.name}}</td>
+          <td>{{app.version}}</td>
+          <td>{{app.hostname}}</td>
+          <td>{{app.httpport}}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="tab-pane" id="modules">
+      <table class="table">
+        <tr><th width="20%">Name</th><th width="20%">Path</th><th>Status</th></tr>
+        <tr ng-repeat="module in modules">
+         <td>{{module.name}}</td>
+         <td>{{module.path}}</td>
+         <td title="{{module.status}}">{{module.status | statusName}}</td>
+       </tr>
+     </table>
+   </div>
+   <div class="tab-pane" id="rest-apis">
+     <table class="table" ng-repeat="module in modules">
+      <caption>{{module.name}}</caption>
+      <tr><th width="15%">Name</th><th width="15%">Method</th><th width="40%">Url</th><th>Status</th></tr>
+      <tr ng-repeat="api in module.restApis">
+       <td>{{api.name}}</td>
+       <td>{{api.method | uppercase}}</td>
+       <td><a href="{{forURL(app, api)}}" target="_blank">{{forURL(app, api)}}</td>
+       <td title="{{api.status}}">{{api.status | statusName}}</td>
+     </tr>
+   </table>
+ </div>
+ <div class="tab-pane" id="client-apps">
+  <table class="table">
+    <tr><th>Name</th><th>AccessKey</th><th>SecretKey</th><th>Type</th><th>Status</th><th>Alive?</th></tr>
+    <tr ng-repeat="app in clientApps">
+     <td><a href="{{forURL(app)}}" target="_blank">{{app.name}}</td>
+     <td>{{app.accessKey}}</td>
+     <td>{{app.secretKey}}</td>
+     <td>{{app.type}}</td>
+     <td title="{{app.status}}">{{app.status | statusName}}</td>
+     <td>{{app.alive}}</td>
+   </tr>
+ </table>
+</div>
+</div>
+<br/>
+</div>
