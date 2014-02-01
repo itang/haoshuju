@@ -27,7 +27,7 @@ func (c App) Version() revel.Result {
 func (c App) ServerTime() revel.Result {
 	restApiURL := "http://localhost:5000/api/time"
 	resp := data.ServerTimeResponse{}
-	if err := gotang.GetJSON(restApiURL, &resp); err != nil {
+	if err := gotang.HttpGetAsJSON(restApiURL, &resp); err != nil {
 		revel.WARN.Printf("get %s, error:%v", restApiURL, err)
 		return c.RenderJson(open.RestResponse{Code: 1, Data: "unknown"})
 	}

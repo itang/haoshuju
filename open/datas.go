@@ -61,6 +61,12 @@ type ClientApp struct {
 	SecretKey string `json:"secretKey"`
 }
 
+type Server interface {
+	HttpPort() int
+	Name() string
+	Run()
+}
+
 type RestResponseBase struct {
 	Code    int    `json:"code"`
 	Message string `json:"message"`

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-cd ../haoshuju.net
-sh run.sh &
+cd ../cdn
+go run main.go &
 
 cd ../api
 go run main.go

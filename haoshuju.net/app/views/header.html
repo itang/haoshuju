@@ -5,12 +5,12 @@
     <title>{{.title}}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="shortcut icon" type="image/png" href="/public/img/favicon.png">
-    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost:8081/libs/bootstrap/css/bootstrap.css">
     {{range .moreStyles}}
       <link rel="stylesheet" type="text/css" href="/public/{{.}}">
     {{end}}
-    <script src="/public/js/vendor/jquery/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/public/js/vendor/angular/angular.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="http://localhost:8081/js/vendor/jquery/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="http://localhost:8081/js/vendor/angular/angular.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="/public/js/app/app.js"></script>
     <script src="/public/js/app/controllers.js"></script>
     <script src="/public/js/app/filters.js"></script>

@@ -4,14 +4,14 @@ import (
 	"github.com/codegangsta/martini"
 	"github.com/codegangsta/martini-contrib/render"
 
-	"github.com/itang/haoshuju/api/services"
+	api_models "github.com/itang/haoshuju/api/modules/api/models"
 )
 
-func AppInfoHandler(services services.Services, r render.Render) {
+func AppInfoHandler(services api_models.Services, r render.Render) {
 	r.JSON(200, services.GetApiApp())
 }
 
-func AppInfoPropHandler(services services.Services, params martini.Params) (ret string) {
+func AppInfoPropHandler(services api_models.Services, params martini.Params) (ret string) {
 	apiApp := services.GetApiApp()
 	switch params["prop"] {
 	case "version":
@@ -22,6 +22,6 @@ func AppInfoPropHandler(services services.Services, params martini.Params) (ret 
 	return
 }
 
-func ClientAppsHandler(services services.Services, r render.Render) {
+func ClientAppsHandler(services api_models.Services, r render.Render) {
 	r.JSON(200, services.GetClientApps())
 }
