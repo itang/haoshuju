@@ -24,6 +24,7 @@ func Routes() http.Handler {
 }
 
 func cdn(resName string) string {
+	// TODO: load from config
 	const CDN_URL_PREFIX = "http://localhost:8081"
 	var resourcePath string = ""
 	switch {
