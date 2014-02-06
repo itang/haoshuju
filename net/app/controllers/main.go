@@ -6,7 +6,7 @@ import (
 	"github.com/itang/gotang"
 	gtime "github.com/itang/gotang/time"
 	"github.com/itang/haoshuju/api/modules/api/data"
-	"github.com/itang/haoshuju/haoshuju.net/app"
+	"github.com/itang/haoshuju/net/app"
 	"github.com/itang/haoshuju/open"
 	"github.com/robfig/revel"
 )
