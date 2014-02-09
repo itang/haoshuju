@@ -4,7 +4,7 @@ import (
 	"net/url"
 
 	"github.com/codegangsta/martini"
-	"github.com/codegangsta/martini-contrib/render"
+	"github.com/martini-contrib/render"
 
 	"github.com/itang/haoshuju/open"
 	"github.com/itang/haoshuju/util"

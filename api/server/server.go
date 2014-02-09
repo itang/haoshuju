@@ -6,9 +6,9 @@ import (
 	"net/http"
 
 	"github.com/codegangsta/martini"
-	"github.com/codegangsta/martini-contrib/strip"
 	"github.com/itang/gotang"
 	"github.com/itang/haoshuju/open"
+	"github.com/martini-contrib/strip"
 
 	"github.com/itang/haoshuju/api/modules/api"
 	"github.com/itang/haoshuju/api/modules/api/models"

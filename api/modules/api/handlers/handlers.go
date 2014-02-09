@@ -3,9 +3,9 @@ package handlers
 import (
 	"time"
 
-	"github.com/codegangsta/martini-contrib/render"
 	gtime "github.com/itang/gotang/time"
 	"github.com/itang/haoshuju/api/modules/api/data"
+	"github.com/martini-contrib/render"
 )
 
 func ServerTimeHandler(r render.Render) {

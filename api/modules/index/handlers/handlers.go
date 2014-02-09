@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/codegangsta/martini-contrib/render"
+	"github.com/martini-contrib/render"
 )
 
 func IndexHandler(resp http.ResponseWriter, req *http.Request) {

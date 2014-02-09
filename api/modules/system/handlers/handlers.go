@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"github.com/codegangsta/martini"
-	"github.com/codegangsta/martini-contrib/render"
+	"github.com/martini-contrib/render"
 
 	api_models "github.com/itang/haoshuju/api/modules/api/models"
 )
