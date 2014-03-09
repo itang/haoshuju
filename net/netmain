@@ -1,0 +1,10 @@
+#!/bin/bash
+
+PROJECT=github.com/itang/haoshuju/net
+task=$1
+
+case $task in
+    ""|run|dev) revel run ${PROJECT} dev;;
+          prod) revel run ${PROJECT} prod;;
+          test) revel test ${PROJECT} dev;;
+esac

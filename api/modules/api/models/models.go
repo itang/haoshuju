@@ -68,6 +68,6 @@ func portFromEnvOr(defaultPort int) int {
 		return defaultPort
 	}
 	iport, err := strconv.Atoi(port)
-	gotang.AssertNoError(err)
+	gotang.AssertNoError(err, "")
 	return iport
 }

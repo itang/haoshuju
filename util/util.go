@@ -24,6 +24,6 @@ func CheckHostAlive(hostaddr string) bool {
 
 func UUID() string {
 	u4, err := uuid.NewV4()
-	gotang.AssertNoError(err)
+	gotang.AssertNoError(err, "")
 	return u4.String()
 }
